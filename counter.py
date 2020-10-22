@@ -252,12 +252,3 @@ class Ui_MainWindow(object):
         self.label_12.setText(_translate("MainWindow", "общ. х.индекс"))
         self.label_13.setText(_translate("MainWindow", "Калории:"))
 
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
