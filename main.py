@@ -16,24 +16,12 @@ v_book_lcd_9 = []
 v_book_lcd_10 = []
 
 
+#связь с кнопками из counter.py
 def main():
 
 	
 	ui.setupUi(MainWindow)
 	MainWindow.show()
-
-	day_list = []
-
-	current_date = str(datetime.date.today())
-
-	daycount_file = open('daycount.txt','r')
-
-	p_liner = daycount_file.readlines()
-	liner = [i[0:-1] for i in p_liner]
-	
-	#if liner[0] != current_date:
-		#pass
-
 
 	ui.label_5.setGeometry(QtCore.QRect(300, 270, 0, 0))
 	ui.label_6.setGeometry(QtCore.QRect(300, 270, 0, 0))
@@ -55,7 +43,8 @@ def main():
 	
 	sys.exit(app.exec_())
 
-	
+
+#возвращает список только названий продуктов, участвует в поиске	
 def booker_name():
 	
 	
@@ -75,13 +64,14 @@ def booker_name():
 	return book_t
 
 
+#функция установки текста в элемент combobox qt/
 def combobox():
-	
 	
 	set_t = ui.comboBox.currentText()
 	ui.lineEdit.setText(set_t)
 
 
+#читает данные из файла, возвращает весь список продуктов базы
 def booker():
 	
 	
@@ -93,9 +83,9 @@ def booker():
 	return book_t
 
 
+#функция для записи пользователем новых значений в базу
 def record():
 	
-
 	t_file = open('base.txt','a')
 
 	name_t = str(ui.lineEdit.text()) + '\n'
@@ -154,30 +144,7 @@ def record():
 	else: ui.lcdNumber.display('0')
 
 
-def resetter():
-	
-	
-	reset_file = open('daycount.txt','w')
-	reset_file.write('')
-	reset_file.close()
-
-
-def daycounter(common,n_1,n_2,n_3,n_4):
-	
-	day_file = open('daycount.txt','a')
-
-	current_date = datetime.date.today()
-
-	date_reborn = str(current_date)
-
-	day_file.write(date_reborn[0:10] + '\n')
-	day_file.write(str(n_4) + '\n')
-	day_file.write(str(n_2) + '\n')
-	day_file.write(str(n_1) + '\n')
-	day_file.write(str(n_3) + '\n')
-	day_file.write(str(common) + '\n')
-
-
+#визуальное изменение интерфейса
 def visual():
 
 	
@@ -203,6 +170,7 @@ def visual():
 	ui.pushButton_2.setGeometry(QtCore.QRect(230, 490, 201, 61))
 
 
+#функция извлечения значений из общего массива
 def get_value(x):
 	
 	
@@ -225,9 +193,9 @@ def get_value(x):
 	return ret_book
 
 
+#тут происходит расчет выдаваемых значений
 def get_count():
 	
-
 	combobox()
 
 	try:
@@ -275,18 +243,13 @@ def get_count():
 		ui.label_3.setText("Ошибка! Такого продукта нет")
 	
 	vidget()
-	daycounter(int(rested_1),int(rested_2),int(rested_3),int(rested_4),int(rested_5))
+	
 
 	ui.lineEdit_2.clear()
 	ui.lineEdit.clear()
 
 
-def dayget():
-	pass
-	#getter = open('daycount.txt','r')
-	#list_line = getter.readlines()
-
-
+#визуальное изменения интерфейса
 def change():
 	
 	
@@ -311,6 +274,7 @@ def change():
 	ui.lineEdit_2.clear()
 
 
+#выводит на экраны значения калорийности и питательности из общих массивов
 def vidget():
 
 	
@@ -334,6 +298,7 @@ def vidget():
 	ui.lcdNumber_10.display(t4_sum / 12)
 
 
+#поисковик для строки, на каждый новый введенный символ возвращает список значений с похожими элементами
 def finder(f_value):
 
 	
@@ -353,6 +318,7 @@ def finder(f_value):
 	return t_book
 
 
+#функция для связи с элементом combobox из qt
 def line_finder():
 	
 	
@@ -367,5 +333,6 @@ def line_finder():
 		ui.comboBox.addItem(i)
 
 
+#функция инициализации приложения
 if __name__ == "__main__":
 	main()
